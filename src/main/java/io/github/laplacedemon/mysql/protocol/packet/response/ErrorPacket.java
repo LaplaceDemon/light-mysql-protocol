@@ -3,7 +3,6 @@ package io.github.laplacedemon.mysql.protocol.packet.response;
 import java.io.IOException;
 
 import io.github.laplacedemon.mysql.protocol.buffer.InputMySQLBuffer;
-import io.github.laplacedemon.mysql.protocol.buffer.MySQLBuffer;
 import io.github.laplacedemon.mysql.protocol.packet.MySQLPacket;
 
 public class ErrorPacket extends MySQLPacket {
@@ -34,15 +33,31 @@ public class ErrorPacket extends MySQLPacket {
      */
     private String errorMesssage;
     
-    @Override
+    public int getErrorCode() {
+		return errorCode;
+	}
+
+	public byte[] getSqlState() {
+		return sqlState;
+	}
+
+	public String getErrorMesssage() {
+		return errorMesssage;
+	}
+
+	@Override
 	public void read(InputMySQLBuffer buffer) throws IOException {
-		super.read(buffer);
-		
-		byte typeFlagByte = buffer.readByte();
-		if(this.TypeFlag != typeFlagByte) {
-			throw new RuntimeException();
+    	read(buffer, false);
+	}
+    
+	public void read(InputMySQLBuffer buffer, boolean needReadTypeByte) throws IOException {
+    	if (needReadTypeByte) {
+			byte typeFlagByte = buffer.readByte();
+			if(this.TypeFlag != typeFlagByte) {
+				throw new RuntimeException();
+			}
 		}
-		
+    	
 		this.errorCode = buffer.readUShort();
 		
 		byte flagByte = buffer.readByte();
@@ -53,12 +68,11 @@ public class ErrorPacket extends MySQLPacket {
 		this.sqlState = buffer.readNBytes(5);
 		
 		// 读取剩余所有字节
-		int infoLength = super.length - (1 + 2 + 1 + 5);
+		int infoLength = super.packetBodyLength - (1 + 2 + 1 + 5);
 		if(infoLength > 0) {
 			byte[] serverInfoBytes = buffer.readNBytes(infoLength);
 			this.errorMesssage = new String(serverInfoBytes);
 		}
-		
 	}
     
 }

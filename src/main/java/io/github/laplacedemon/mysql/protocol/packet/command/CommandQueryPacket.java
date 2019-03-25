@@ -24,7 +24,7 @@ public class CommandQueryPacket extends MySQLPacket {
 		}
     	
 		// 读取剩余所有字节
-		int sqlLen = super.length - 1;
+		int sqlLen = super.packetBodyLength - 1;
 		if(sqlLen > 0) {
 			byte[] sqlBytes = buffer.readNBytes(sqlLen);
 			this.sql = new String(sqlBytes);
@@ -52,7 +52,7 @@ public class CommandQueryPacket extends MySQLPacket {
 
 	@Override
 	public void autoSetLength() {
-		this.length = 1 + this.sql.length();
+		this.packetBodyLength = 1 + this.sql.length();
 	}
     
 }

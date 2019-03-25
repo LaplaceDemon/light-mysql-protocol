@@ -9,25 +9,25 @@ import io.github.laplacedemon.mysql.protocol.util.LitteEndianNumberUtils;
 import io.github.laplacedemon.mysql.protocol.util.MySQLByteUtils;
 
 public abstract class MySQLPacket implements ReadablePacket,WritablePacket {
-    protected int length;
+    protected int packetBodyLength;
     protected byte sequenceId;
     
     public MySQLPacket() {
 		super();
 	}
     
-    public MySQLPacket(int length, byte sequenceId) {
+    public MySQLPacket(int packetBodyLength, byte sequenceId) {
 		super();
-		this.length = length;
+		this.packetBodyLength = packetBodyLength;
 		this.sequenceId = sequenceId;
 	}
 
-	public int getLength() {
-        return length;
+	public int getPacketBodyLength() {
+        return packetBodyLength;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public void setPacketBodyLength(int packetBodyLength) {
+        this.packetBodyLength = packetBodyLength;
     }
 
     public byte getSequenceId() {
@@ -39,21 +39,20 @@ public abstract class MySQLPacket implements ReadablePacket,WritablePacket {
     }
     
     public void autoSetLength() {
-    	this.length = 0;
+    	this.packetBodyLength = 0;
     }
     
     @Override
     public void read(InputMySQLBuffer buffer) throws IOException {
     	byte[] buf = new byte[4];
     	buffer.readNBytes(buf, 0, 4);
-    	this.length = MySQLByteUtils.getPacketLength(buf);
+    	this.packetBodyLength = MySQLByteUtils.getPacketLength(buf);
     	this.sequenceId = buf[3];
-    	
     }
     
     @Override
     public void write(MySQLMessage message, OutputMySQLBuffer output) {
-    	byte[] packetLengthBytes = LitteEndianNumberUtils.to3Bytes(this.length);
+    	byte[] packetLengthBytes = LitteEndianNumberUtils.to3Bytes(this.packetBodyLength);
     	message.writeBytes(packetLengthBytes);
     	message.writeByte(this.sequenceId);
     }

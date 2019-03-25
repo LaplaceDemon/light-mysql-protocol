@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 import io.github.laplacedemon.mysql.protocol.buffer.InputMySQLBuffer;
-import io.github.laplacedemon.mysql.protocol.buffer.MySQLBuffer;
 import io.github.laplacedemon.mysql.protocol.buffer.MySQLMessage;
 import io.github.laplacedemon.mysql.protocol.buffer.OutputMySQLBuffer;
 import io.github.laplacedemon.mysql.protocol.packet.MySQLPacket;
@@ -42,12 +41,42 @@ public class OKayPacket extends MySQLPacket {
      */
     private String info;
     
+	public byte getTypeFlag() {
+		return TypeFlag;
+	}
+
+	public BigInteger getAffectedRows() {
+		return affectedRows;
+	}
+
+	public BigInteger getLastInsertId() {
+		return lastInsertId;
+	}
+
+	public short getStatusFlags() {
+		return statusFlags;
+	}
+
+	public int getWarnings() {
+		return warnings;
+	}
+	
+	public String getInfo() {
+		return info;
+	}
+	
 	@Override
 	public void read(InputMySQLBuffer buffer) throws IOException {
-//		byte typeFlagByte = buffer.readByte();
-//		if(this.TypeFlag != typeFlagByte) {
-//			throw new RuntimeException();
-//		}
+		read(buffer, false);
+	}
+
+	public void read(InputMySQLBuffer buffer, boolean needReadTypeByte) throws IOException {
+		if (needReadTypeByte) {
+			byte typeFlagByte = buffer.readByte();
+			if(this.TypeFlag != typeFlagByte) {
+				throw new RuntimeException();
+			}	
+		}
 		
 		this.affectedRows = buffer.readLenencInteger();
 		this.lastInsertId = buffer.readLenencInteger();
@@ -55,6 +84,7 @@ public class OKayPacket extends MySQLPacket {
 		this.warnings = buffer.readUShort();
 		
 		// 读取剩余所有字节
+		// TODO 这样处理是错误的。剩余字节可能还包含其他信息。
 		int readableBytes = buffer.readableBytes();
 		byte[] serverInfoBytes = buffer.readNBytes(readableBytes);
 		this.info = new String(serverInfoBytes);

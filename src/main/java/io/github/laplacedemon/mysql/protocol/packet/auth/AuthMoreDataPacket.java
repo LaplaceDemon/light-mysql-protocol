@@ -57,9 +57,9 @@ public class AuthMoreDataPacket extends MySQLPacket {
 	@Override
 	public void autoSetLength() {
 		if(authMethodData == null) {
-			this.length = 1;
+			this.packetBodyLength = 1;
 		} else {
-			this.length = 1 + authMethodData.length();
+			this.packetBodyLength = 1 + authMethodData.length();
 		}
 	}
 

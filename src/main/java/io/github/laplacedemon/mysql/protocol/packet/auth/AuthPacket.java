@@ -213,7 +213,7 @@ public class AuthPacket extends MySQLPacket {
 			packetLength += (authPluginName.length() + 1);
 		}
 		
-		this.length = packetLength;
+		this.packetBodyLength = packetLength;
 	}
 	
     

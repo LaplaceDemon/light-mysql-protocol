@@ -21,7 +21,7 @@ public class AuthSwitchResponsePacket extends MySQLPacket {
 
 	@Override
     public void read(InputMySQLBuffer buffer) throws IOException {
-		byte[] readNBytes = buffer.readNBytes(length);
+		byte[] readNBytes = buffer.readNBytes(packetBodyLength);
 		String authPluginResponseString = new String(readNBytes);
 		this.authPluginResponse = authPluginResponseString;
     }
@@ -44,7 +44,7 @@ public class AuthSwitchResponsePacket extends MySQLPacket {
 	@Override
 	public void autoSetLength() {
 		if(this.authPluginResponse!=null) {
-			this.length = this.authPluginResponse.length();
+			this.packetBodyLength = this.authPluginResponse.length();
 		}
 	}
 	
