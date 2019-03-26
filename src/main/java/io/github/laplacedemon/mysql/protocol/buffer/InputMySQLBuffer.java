@@ -15,6 +15,14 @@ public interface InputMySQLBuffer {
 	 */
 	byte[] readUtils(byte b);
 
+	/**
+	 * 包括最后一个字节
+	 * 
+	 * @param b
+	 * @return
+	 */
+	byte[] readUtils(byte b, int initBytes);
+
 	void skip(int length);
 
 	int readInt();

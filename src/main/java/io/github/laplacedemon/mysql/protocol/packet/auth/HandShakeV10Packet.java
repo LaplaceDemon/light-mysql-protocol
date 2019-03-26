@@ -197,11 +197,11 @@ public class HandShakeV10Packet extends MySQLPacket {
 		byte readByte = buffer.readByte();
 		this.ProtocolVersion = readByte;
     	
-    	byte[] readUtils = buffer.readUtils((byte)0);
+    	byte[] readUtils = buffer.readUtils((byte)0, 16);
 		byte[] serverVersionBytes = readUtils;
-    	this.serverVersion = new String(serverVersionBytes);
+		this.serverVersion = new String(serverVersionBytes);
     	
-    	this.threadId= buffer.readInt();
+    	this.threadId = buffer.readInt();
     	
     	this.seed0 = buffer.readNBytes(8);
     	
