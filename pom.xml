@@ -5,6 +5,9 @@
 	<groupId>io.github.laplacedemon</groupId>
 	<artifactId>light-mysql-protocol</artifactId>
 	<version>0.1.0</version>
+	<properties>
+		<maven.javadoc.skip>true</maven.javadoc.skip>
+	</properties>
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -57,6 +60,24 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
+			<!-- 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<additionalparam>-Xdoclint:none</additionalparam>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
 		</plugins>
 	</build>
 </project>
