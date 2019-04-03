@@ -5,14 +5,31 @@
 	<groupId>io.github.laplacedemon</groupId>
 	<artifactId>light-mysql-protocol</artifactId>
 	<version>0.1.0</version>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>9</version>
+	</parent>
+	<scm>
+		<url>https://github.com/LaplaceDemon/async-mysql-client</url>
+		<connection>scm:git:git@github.com:LaplaceDemon/async-mysql-client.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:LaplaceDemon/async-mysql-client.git</developerConnection>
+	</scm>
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin>
