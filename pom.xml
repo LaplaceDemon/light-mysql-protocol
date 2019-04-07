@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.laplacedemon</groupId>
 	<artifactId>light-mysql-protocol</artifactId>
-	<version>0.1.0</version> 
+	<version>0.1.1</version> 
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -18,9 +18,9 @@
 		<version>9</version>
 	</parent>
 	<scm>
-		<url>https://github.com/LaplaceDemon/async-mysql-client</url>
-		<connection>scm:git:git@github.com:LaplaceDemon/async-mysql-client.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:LaplaceDemon/async-mysql-client.git</developerConnection>
+		<url>https://github.com/LaplaceDemon/light-mysql-protocol</url>
+		<connection>scm:git:git@github.com/LaplaceDemon/light-mysql-protocol.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/LaplaceDemon/light-mysql-protocol.git</developerConnection>
 	</scm>
 	<dependencies>
 		<dependency>
