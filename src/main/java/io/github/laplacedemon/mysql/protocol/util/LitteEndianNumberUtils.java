@@ -13,7 +13,9 @@ public class LitteEndianNumberUtils {
     /**
      * 小端字节转short
      * @param b
+     *      byte
      * @return
+     *      short
      */
     public static short toShort(byte[] b) {
         short v = 0;
@@ -27,8 +29,11 @@ public class LitteEndianNumberUtils {
     /**
      * 小端字节转int
      * @param b
+     *      a byte
      * @param offset
+     *      offset
      * @return
+     *      a int
      */
     public static int toInt(byte[] b, int offset) {
         int v = b[offset + 0];
@@ -104,6 +109,12 @@ public class LitteEndianNumberUtils {
     
     /**
      * 小端数据转Java整数。
+     * @param b
+     *      byte
+     * @param offset
+     *      offset
+     * @return
+     *      a int
      */
     public static int toIntFrom3Bytes(byte[] b, int offset) {
         int v = b[offset + 0];
@@ -117,16 +128,22 @@ public class LitteEndianNumberUtils {
     
     /**
      * 小端字节数转成Java整数。
+     * @param b
+     *      byte
+     * @return
+     *      a int
      */
     public static int toIntFrom3Bytes(byte[] b) {
         return toIntFrom3Bytes(b,0);
     }
     
     /**
-     * 0x00abcdef ---> ef cd ab
+     * 0x00abcdef --- ef cd ab
      * 
      * @param x
+     *      a int number
      * @return
+     *      a byte array
      */
     public static byte[] to3Bytes(int x) {
     	byte[] bytes = new byte[3];
@@ -144,9 +161,11 @@ public class LitteEndianNumberUtils {
     }
     
     /**
-     * 0x00abcdef --->00 ef cd ab
+     * 0x00abcdef --- 00 ef cd ab
      * @param x
+     *      a int number
      * @return
+     *      a byte array
      */
     public static byte[] toBytes(int x) {
         byte[] bytes = new byte[4];

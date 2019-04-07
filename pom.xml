@@ -5,9 +5,6 @@
 	<groupId>io.github.laplacedemon</groupId>
 	<artifactId>light-mysql-protocol</artifactId>
 	<version>0.1.0</version> 
-	<properties>
-		<maven.javadoc.skip>true</maven.javadoc.skip>
-	</properties>
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -33,14 +30,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<profiles>
-		<profile>
-			<id>disable-javadoc-doclint</id>
-			<properties>
-				<javadoc.opts>-Xdoclint:none</javadoc.opts>
-			</properties>
-		</profile>
-	</profiles>
 	<build>
 		<plugins>
 			<plugin>

@@ -62,7 +62,9 @@ public class Security {
      * @param seed
      *            seed
      * @return bytes
-     * @throws NoSuchAlgorithmException 
+     *            bytes 
+     * @throws NoSuchAlgorithmException
+     *              NoSuchAlgorithmException
      */
     public static byte[] scramble411(byte[] password, byte[] seed) throws NoSuchAlgorithmException {
         MessageDigest md;
@@ -103,7 +105,8 @@ public class Security {
      * 
      * @throws DigestException
      *             if an error occurs
-     * @throws NoSuchAlgorithmException 
+     * @throws NoSuchAlgorithmException
+     *             NoSuchAlgorithmException
      */
     public static byte[] scrambleCachingSha2(byte[] password, byte[] seed) throws DigestException, NoSuchAlgorithmException {
         /*

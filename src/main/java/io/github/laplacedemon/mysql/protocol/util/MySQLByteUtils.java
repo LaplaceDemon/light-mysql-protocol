@@ -32,12 +32,14 @@ public class MySQLByteUtils {
 	/**
 	 * https://dev.mysql.com/doc/internals/en/secure-password-authentication.html
 	 * <br>
-	 * SHA1( password ) XOR SHA1( "20-bytes random data from server" <concat> SHA1(
-	 * SHA1( password ) ) )
+	 * SHA1( password ) XOR SHA1( "20-bytes random data from server"  concat  SHA1( SHA1( password ) ) )
 	 * 
 	 * @param pass
+	 *         pass
 	 * @param seed
+	 *         seed
 	 * @return
+	 *         a byte array
 	 */
 	public static final byte[] scramble411(byte[] pass, byte[] seed) {
 		MessageDigest md;
@@ -82,8 +84,12 @@ public class MySQLByteUtils {
 	}
 
 	/**
-	 * @param pass
+	 * @param password
+	 *         password
 	 * @param seed
+	 *         seed
+	 * @return
+	 *         a byte array
 	 */
 	public static final byte[] cachingSHA2Password(byte[] password, byte[] seed) {
 		try {
@@ -103,8 +109,12 @@ public class MySQLByteUtils {
 	 * https://dev.mysql.com/doc/internals/en/integer.html#packet-Protocol::LengthEncodedInteger
 	 * 
 	 * @param firstByte
+	 *         first byte 
 	 * @param inputMySQLBuffer
-	 */
+	 *         A InputMySQLBuffer object
+	 * @return
+	 *        a integer number
+	 */        
 	public static long readLengthEncodedInteger(byte firstByte, InputMySQLBuffer inputMySQLBuffer) {
 		if (firstByte < 251) {
 			return firstByte;
@@ -126,9 +136,18 @@ public class MySQLByteUtils {
 
 	/**
 	 * transformation:8.0.5以上的版本，值为 RSA/ECB/OAEPWithSHA-1AndMGF1Padding
-	 * 
-	 * @param codename
+	 */
+	/**
+	 * @param password
+	 *         password
+	 * @param seed
+	 *         seed
+	 * @param publicKeyString
+	 *         PublicKeyString
+	 * @param transformation
+	 *         transformation
 	 * @return
+	 *         A byte array
 	 */
 	public static byte[] encryptPassword(String password, byte[] seed, String publicKeyString, String transformation) {
 		byte[] input = null;
@@ -143,34 +162,5 @@ public class MySQLByteUtils {
 		}
 		return data;
 	}
-
-//	public static final String scramble323(String pass, String seed) {
-//        if ((pass == null) || (pass.length() == 0)) {
-//            return pass;
-//        }
-//        byte b;
-//        double d;
-//        long[] pw = hash(seed);
-//        long[] msg = hash(pass);
-//        long max = 0x3fffffffL;
-//        long seed1 = (pw[0] ^ msg[0]) % max;
-//        long seed2 = (pw[1] ^ msg[1]) % max;
-//        char[] chars = new char[seed.length()];
-//        for (int i = 0; i < seed.length(); i++) {
-//            seed1 = ((seed1 * 3) + seed2) % max;
-//            seed2 = (seed1 + seed2 + 33) % max;
-//            d = (double) seed1 / (double) max;
-//            b = (byte) java.lang.Math.floor((d * 31) + 64);
-//            chars[i] = (char) b;
-//        }
-//        seed1 = ((seed1 * 3) + seed2) % max;
-//        seed2 = (seed1 + seed2 + 33) % max;
-//        d = (double) seed1 / (double) max;
-//        b = (byte) java.lang.Math.floor(d * 31);
-//        for (int i = 0; i < seed.length(); i++) {
-//            chars[i] ^= (char) b;
-//        }
-//        return new String(chars);
-//    }
 
 }

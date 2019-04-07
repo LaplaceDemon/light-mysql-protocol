@@ -9,17 +9,21 @@ public interface InputMySQLBuffer {
 
 	/**
 	 * 包括最后一个字节
-	 * 
 	 * @param b
+	 *         byte
 	 * @return
+	 *         a byte array
 	 */
 	byte[] readUtils(byte b);
-
+	
 	/**
 	 * 包括最后一个字节
-	 * 
 	 * @param b
+	 *         byte
+	 * @param initBytes
+	 *         init Bytes
 	 * @return
+	 *         a byte array
 	 */
 	byte[] readUtils(byte b, int initBytes);
 

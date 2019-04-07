@@ -23,13 +23,17 @@ public interface MySQLMessage {
 	/**
 	 * 写字符串，结尾有0x00。
 	 * https://dev.mysql.com/doc/internals/en/string.html#packet-Protocol::NulTerminatedString
-	 * @param str
+	 * 
+	 * @param data
+	 *         write data
 	 */
 	void writeStringNul(String data);
 
 	/**
 	 * https://dev.mysql.com/doc/internals/en/string.html#packet-Protocol::RestOfPacketString
+	/**
 	 * @param sql
+	 *         write string
 	 */
 	void writeStringEOF(String sql);
 
