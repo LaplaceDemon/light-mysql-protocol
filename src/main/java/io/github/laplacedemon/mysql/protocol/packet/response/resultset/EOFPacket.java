@@ -9,7 +9,7 @@ import io.github.laplacedemon.mysql.protocol.packet.MySQLPacket;
 
 public class EOFPacket extends MySQLPacket {
 	/**
-         * 类型值，恒为254 (0xfe)
+     * 类型值，恒为254 (0xfe)
      * 1 Byte
      */
     private final byte TypeFlag = (byte)0xfe;
@@ -57,18 +57,4 @@ public class EOFPacket extends MySQLPacket {
 		output.write(message);
 	}
 	
-	
-    
-//    @Override
-//    public void write(ChannelHandlerContext ctx) {
-//        ByteBuf buffer = ctx.alloc().buffer();
-//        buffer.writeByte(super.sequenceId);
-//        buffer.writeByte(TYPE_FLAG);
-//        if((this.capabilityFlag1 & CapabilityFlag.CLIENT_PROTOCOL_41) != 0){
-//            buffer.writeShort(this.warnings);
-//            buffer.writeShort(this.statusFlags);
-//        }
-//        
-//        ctx.channel().write(buffer);
-//    }
 }
